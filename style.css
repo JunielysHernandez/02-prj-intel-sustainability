@@ -1,112 +1,108 @@
-/* Set a vertical gradient background for the whole page */
+/* =========================
+   Background & Base Styles
+   ========================= */
+
+/* Animated code rain background */
+#codeRain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Page background gradient */
 body {
-  /* The gradient goes from blue at the top, to navy in the middle, to black at the bottom */
   background: linear-gradient(to bottom, #0068b5 0%, #003e74 50%, #000000 100%);
-  color: #00eaff; /* Bright blue text */
-  font-family: 'Courier New', Courier, monospace; /* Futuristic font */
+  color: #00eaff;
+  font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
 }
 
-/* Center the header and add some spacing */
-header div {
-  text-align: center;
-  padding: 32px 16px 16px 16px;
+/* =========================
+   Header Styles
+   ========================= */
+
+/* Simple, beginner-friendly header styles with no extra effects */
+header {
+  position: relative; /* Needed for z-index to work */
+  z-index: 2;         /* Higher than timeline cards and background */
+  background: none;         /* No background */
+  text-align: center;       /* Center the content */
+  margin: 32px 0 12px 0;    /* Space above and below */
+  font-size: 1em;           /* Normal font size */
 }
 
-/* Style the main heading */
+/* Center the header content */
+header div {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
+}
+
+/* Logo: just size and centering, no glow or filter */
+header img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  filter: none;
+}
+
+/* Main heading: blue text with a darker blue shadow for a less bright look */
 h1 {
   font-size: 2.5em;
   letter-spacing: 2px;
-  text-shadow: 0 0 8px #00eaff;
-  margin-bottom: 8px;
+  color: #15bafc; /* Darker blue for the heading */
+  /* Use a darker blue shadow for a more subtle glow */
+  text-shadow:
+    0 0 4px #003e74,   /* Dark blue glow */
+    0 0 8px #003e74,   /* Stronger dark blue glow */
+    0 0 2px #fff;      /* Soft white glow for readability */
+  margin: 0.5em 0 0.2em 0;
 }
 
-/* Style the subheading/description */
+/* Subheading/description: even darker blue text with a subtle glow */
 header p {
   font-size: 1.2em;
-  color: #7fd7ff; /* Lighter blue for contrast */
+  color: #3fc6ff; /* Slightly darker blue for the subheading */
+  /* Subtle dark blue shadow for a gentle pop */
+  text-shadow:
+    0 0 2px #003e74,   /* Dark blue glow */
+    0 0 1px #fff;      /* Soft white glow */
+  margin: 0 0 1em 0;
 }
 
-/* Make the Intel logo smaller */
-header img {
-  width: 200px;    /* Set a smaller width */
-  height: auto;    /* Keep the aspect ratio */
-  margin-bottom: 16px; /* Add a little space below the logo */
-  display: block;  /* Make sure it stays on its own line */
-  margin-left: auto;  /* Center the image horizontally */
-  margin-right: auto;
-}
+/* =========================
+   Timeline Styles
+   ========================= */
 
-/* This section is for scroll-section and content styling */
-
-/* The scroll-section class makes a section fill the screen and centers its content */
-.scroll-section {
-  min-height: 100vh;              /* Make the section at least as tall as the screen */
-  display: flex;                  /* Use flexbox to center content */
-  align-items: center;            /* Vertically center content */
-  justify-content: center;        /* Horizontally center content */
-  background: #f5f8ff;            /* Light background color */
-  padding: 2rem;                  /* Add some space inside the section */
-  transition: background 1s ease; /* Smooth background color change */
-}
-
-/* The content class styles the inner content of the scroll-section */
-.content {
-  text-align: center;             /* Center text */
-  opacity: 0;                     /* Start hidden (for animation) */
-  transform: translateY(50px);    /* Start slightly lower (for animation) */
-  transition: all 0.8s ease-out;  /* Smoothly animate in */
-  max-width: 600px;               /* Limit the width */
-}
-
-/* Style for headings inside content */
-.content h2 {
-  color: #003e74;                 /* Dark blue color */
-  font-size: 2.5rem;              /* Large text */
-  margin-bottom: 1rem;            /* Space below heading */
-}
-
-/* Style for paragraphs inside content */
-.content p {
-  color: #1b1f23;                 /* Very dark gray text */
-  font-size: 1.2rem;              /* Slightly larger text */
-  margin-bottom: 1rem;            /* Space below paragraph */
-}
-
-/* Style for images inside content */
-.content img {
-  width: 100%;                    /* Make image fill container */
-  max-width: 300px;               /* But not bigger than 300px */
-  border-radius: 12px;            /* Rounded corners */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
-}
-
-/* When the section is visible, fade in and move up the content */
-.scroll-section.visible .content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Timeline section spacing - vertical layout */
 section {
-  display: flex;              /* Stack cards in a column */
-  flex-direction: column;     /* Arrange cards vertically */
-  align-items: center;        /* Center cards horizontally */
-  position: relative;         /* Needed for the timeline line */
-  padding: 48px 8px 24px 8px; /* Space above and below */
-  gap: 40px;                  /* Space between cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 48px 8px 24px 8px;
+  gap: 40px;
 }
 
-/* Add a vertical glowing line for the timeline */
 section::before {
   content: "";
   position: absolute;
-  left: 50%;                  /* Center the line horizontally */
+  left: 50%;
   top: 0;
   transform: translateX(-50%);
-  width: 4px;                 /* Thin line */
-  height: 100%;               /* Full height of section */
+  width: 4px;
+  height: 100%;
   background: linear-gradient(to bottom, #00eaff 0%, #7fd7ff 100%);
   box-shadow: 0 0 24px #00eaff, 0 0 48px #7fd7ff;
   border-radius: 2px;
@@ -114,48 +110,53 @@ section::before {
   opacity: 0.7;
 }
 
-/* Style each timeline card */
 section > div {
-  background: rgba(16, 24, 32, 0.97); /* Dark, slightly see-through */
-  border: 2px solid #00eaff;          /* Bright blue border */
-  border-radius: 16px;                 /* Rounded corners */
+  background: rgba(16, 24, 32, 0.97);
+  border: 2px solid #00eaff;
+  border-radius: 16px;
   box-shadow: 0 0 24px #00eaff, 0 0 32px #101820 inset;
   width: 280px;
   padding: 20px;
-  margin: 0;                          /* No extra margin */
+  margin: 0;
   position: relative;
   transition: transform 0.2s, box-shadow 0.2s;
-  z-index: 1;                         /* Above the timeline line */
+  z-index: 1;
+}
+/* Hide the timeline card paragraph by default */
+section > div p {
+  display: none; /* Hide the paragraph */
 }
 
-/* Add a glowing dot to connect each card to the timeline */
+/* Show the paragraph when you hover over the card */
+section > div:hover p {
+  display: block; /* Show the paragraph on hover */
+}
+
 section > div::before {
   content: "";
   position: absolute;
-  left: 50%;                          /* Center the dot */
+  left: 50%;
   top: 0;
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
   background: #00eaff;
   border: 3px solid #7fd7ff;
-  border-radius: 50%;                 /* Make it a circle */
+  border-radius: 50%;
   box-shadow: 0 0 24px #00eaff, 0 0 48px #7fd7ff;
   z-index: 2;
 }
 
-/* Cards glow and grow a bit when hovered */
 section > div:hover {
   transform: scale(1.06);
   box-shadow: 0 0 40px #00eaff, 0 0 80px #7fd7ff;
 }
 
-/* Style the year and title */
 section h2 {
   margin: 0 0 4px 0;
   font-size: 1.5em;
   color: #00eaff;
-  text-shadow: 0 0 8px #00eaff;
+  text-shadow: none;
   text-align: center;
 }
 
@@ -166,7 +167,6 @@ section h3 {
   text-align: center;
 }
 
-/* Style the images inside cards */
 section img {
   width: 100%;
   border-radius: 10px;
@@ -175,28 +175,60 @@ section img {
   box-shadow: 0 0 12px #00eaff44;
 }
 
-/* Style the card text */
 section p {
   font-size: 1em;
   color: #c6f6ff;
   text-align: center;
 }
 
-/* Style the scroll/hint text at the bottom */
+/* =========================
+   Scroll Hint & Footer
+   ========================= */
+
+/* Scroll hint at the top */
 body > p {
   text-align: center;
   color: #7fd7ff;
-  margin: 24px 0 16px 0;
-  font-size: 1.1em;
-  letter-spacing: 1px;
-}
-.content {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.8s ease;
+  margin: 16px 0 8px 0;
+  font-size: 0.05em;
+  letter-spacing: 0.5px;
+  opacity: 0.39;
+  position: relative;  /* Needed for z-index to work */
+  z-index: 3;          /* Higher than header and timeline cards */
 }
 
-.scroll-section.visible .content {
+/* Footer styles with blue shadow for a glowing effect */
+footer {
+  text-align: center;
+  opacity: 0.7;
+  margin: 32px 0 12px 0;
+  font-size: 1em;
+  color: #00eaff;
+  /* Add a soft blue glow to the footer text */
+  text-shadow:
+    0 0 6px #00eaff,   /* Blue glow */
+    0 0 2px #003e74;   /* Darker blue shadow */
+}
+
+/* Footer links - keep them bright and add a glow */
+footer a {
+  color: #00eaff;
   opacity: 1;
-  transform: translateY(0);
+  text-decoration: underline;
+  transition: color 0.2s;
+  /* Add a blue glow to links as well */
+  text-shadow:
+    0 0 4px #00eaff,
+    0 0 2px #003e74;
+}
+
+footer a:hover {
+  color: #7fd7ff;
+}
+.logo-wrapper::after {
+  content: "";
+  display: block;
+  height: 60px;
+  background: linear-gradient(to top, #000000ee 0%, transparent 100%);
+  margin-top: -60px;
 }
