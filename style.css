@@ -1,1 +1,202 @@
-/* Add your CSS here */
+/* Set a vertical gradient background for the whole page */
+body {
+  /* The gradient goes from blue at the top, to navy in the middle, to black at the bottom */
+  background: linear-gradient(to bottom, #0068b5 0%, #003e74 50%, #000000 100%);
+  color: #00eaff; /* Bright blue text */
+  font-family: 'Courier New', Courier, monospace; /* Futuristic font */
+  margin: 0;
+  padding: 0;
+}
+
+/* Center the header and add some spacing */
+header div {
+  text-align: center;
+  padding: 32px 16px 16px 16px;
+}
+
+/* Style the main heading */
+h1 {
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #00eaff;
+  margin-bottom: 8px;
+}
+
+/* Style the subheading/description */
+header p {
+  font-size: 1.2em;
+  color: #7fd7ff; /* Lighter blue for contrast */
+}
+
+/* Make the Intel logo smaller */
+header img {
+  width: 200px;    /* Set a smaller width */
+  height: auto;    /* Keep the aspect ratio */
+  margin-bottom: 16px; /* Add a little space below the logo */
+  display: block;  /* Make sure it stays on its own line */
+  margin-left: auto;  /* Center the image horizontally */
+  margin-right: auto;
+}
+
+/* This section is for scroll-section and content styling */
+
+/* The scroll-section class makes a section fill the screen and centers its content */
+.scroll-section {
+  min-height: 100vh;              /* Make the section at least as tall as the screen */
+  display: flex;                  /* Use flexbox to center content */
+  align-items: center;            /* Vertically center content */
+  justify-content: center;        /* Horizontally center content */
+  background: #f5f8ff;            /* Light background color */
+  padding: 2rem;                  /* Add some space inside the section */
+  transition: background 1s ease; /* Smooth background color change */
+}
+
+/* The content class styles the inner content of the scroll-section */
+.content {
+  text-align: center;             /* Center text */
+  opacity: 0;                     /* Start hidden (for animation) */
+  transform: translateY(50px);    /* Start slightly lower (for animation) */
+  transition: all 0.8s ease-out;  /* Smoothly animate in */
+  max-width: 600px;               /* Limit the width */
+}
+
+/* Style for headings inside content */
+.content h2 {
+  color: #003e74;                 /* Dark blue color */
+  font-size: 2.5rem;              /* Large text */
+  margin-bottom: 1rem;            /* Space below heading */
+}
+
+/* Style for paragraphs inside content */
+.content p {
+  color: #1b1f23;                 /* Very dark gray text */
+  font-size: 1.2rem;              /* Slightly larger text */
+  margin-bottom: 1rem;            /* Space below paragraph */
+}
+
+/* Style for images inside content */
+.content img {
+  width: 100%;                    /* Make image fill container */
+  max-width: 300px;               /* But not bigger than 300px */
+  border-radius: 12px;            /* Rounded corners */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* When the section is visible, fade in and move up the content */
+.scroll-section.visible .content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline section spacing - vertical layout */
+section {
+  display: flex;              /* Stack cards in a column */
+  flex-direction: column;     /* Arrange cards vertically */
+  align-items: center;        /* Center cards horizontally */
+  position: relative;         /* Needed for the timeline line */
+  padding: 48px 8px 24px 8px; /* Space above and below */
+  gap: 40px;                  /* Space between cards */
+}
+
+/* Add a vertical glowing line for the timeline */
+section::before {
+  content: "";
+  position: absolute;
+  left: 50%;                  /* Center the line horizontally */
+  top: 0;
+  transform: translateX(-50%);
+  width: 4px;                 /* Thin line */
+  height: 100%;               /* Full height of section */
+  background: linear-gradient(to bottom, #00eaff 0%, #7fd7ff 100%);
+  box-shadow: 0 0 24px #00eaff, 0 0 48px #7fd7ff;
+  border-radius: 2px;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+/* Style each timeline card */
+section > div {
+  background: rgba(16, 24, 32, 0.97); /* Dark, slightly see-through */
+  border: 2px solid #00eaff;          /* Bright blue border */
+  border-radius: 16px;                 /* Rounded corners */
+  box-shadow: 0 0 24px #00eaff, 0 0 32px #101820 inset;
+  width: 280px;
+  padding: 20px;
+  margin: 0;                          /* No extra margin */
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1;                         /* Above the timeline line */
+}
+
+/* Add a glowing dot to connect each card to the timeline */
+section > div::before {
+  content: "";
+  position: absolute;
+  left: 50%;                          /* Center the dot */
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #00eaff;
+  border: 3px solid #7fd7ff;
+  border-radius: 50%;                 /* Make it a circle */
+  box-shadow: 0 0 24px #00eaff, 0 0 48px #7fd7ff;
+  z-index: 2;
+}
+
+/* Cards glow and grow a bit when hovered */
+section > div:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 40px #00eaff, 0 0 80px #7fd7ff;
+}
+
+/* Style the year and title */
+section h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.5em;
+  color: #00eaff;
+  text-shadow: 0 0 8px #00eaff;
+  text-align: center;
+}
+
+section h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1em;
+  color: #7fd7ff;
+  text-align: center;
+}
+
+/* Style the images inside cards */
+section img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #00eaff;
+  box-shadow: 0 0 12px #00eaff44;
+}
+
+/* Style the card text */
+section p {
+  font-size: 1em;
+  color: #c6f6ff;
+  text-align: center;
+}
+
+/* Style the scroll/hint text at the bottom */
+body > p {
+  text-align: center;
+  color: #7fd7ff;
+  margin: 24px 0 16px 0;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+.content {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+.scroll-section.visible .content {
+  opacity: 1;
+  transform: translateY(0);
+}
