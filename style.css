@@ -3,40 +3,84 @@
    ========================= */
 
 /* Animated code rain background */
+/* This puts the code rain behind your content, but in front of the background gradient */
 #codeRain {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;           /* 0 is behind your content (z-index: 1+), but above the gradient (body::before uses -1 or default) */
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  pointer-events: none; /* Lets you click through it */
+  opacity: 0.5;         /* Makes the code rain more transparent */
 }
 
 /* Page background gradient */
+
+/* Animated gradient background for the body */
 body {
-  background: linear-gradient(to bottom, #0068b5 0%, #003e74 50%, #000000 100%);
+  /* Set up the initial gradient */
+  background: linear-gradient(
+    to bottom,
+    #7fd7ff 0%,
+    #4f6d9a 30%,
+    #003e74 60%,
+    #000000 100%
+  );
+  background-size: 100% 200%; /* Make the gradient taller for animation */
+  animation: gradientMove 8s ease-in-out infinite alternate;
   color: #00eaff;
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
 }
 
+/* This puts the gradient in front of the code rain but behind all content */
+body::before {
+  content: "";
+  position: fixed;           /* Stays in place while scrolling */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;                /* -1 is above -1 (code rain), but below your content */
+  pointer-events: none;      /* Lets you click through it */
+  /* The same gradient as before */
+  background: linear-gradient(
+    to bottom,
+    #7fd7ff 0%,
+    #4f6d9a 30%,
+    #003e74 60%,
+    #000000 100%
+  );
+  background-size: 100% 200%;
+  animation: gradientMove 8s ease-in-out infinite alternate;
+  opacity: 1;
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
 /* =========================
    Header Styles
    ========================= */
 
-/* Simple, beginner-friendly header styles with no extra effects */
 header {
   position: relative; /* Needed for z-index to work */
   z-index: 2;         /* Higher than timeline cards and background */
-  background: none;         /* No background */
-  text-align: center;       /* Center the content */
-  margin: 32px 0 12px 0;    /* Space above and below */
-  font-size: 1em;           /* Normal font size */
+  background: none;
+  text-align: center;
+  margin: 32px 0 12px 0;
+  font-size: 1em;
 }
 
-/* Center the header content */
 header div {
   text-align: center;
   padding: 0;
@@ -47,7 +91,6 @@ header div {
   max-width: none;
 }
 
-/* Logo: just size and centering, no glow or filter */
 header img {
   width: 200px;
   height: auto;
@@ -58,27 +101,23 @@ header img {
   filter: none;
 }
 
-/* Main heading: blue text with a darker blue shadow for a less bright look */
 h1 {
   font-size: 2.5em;
   letter-spacing: 2px;
-  color: #15bafc; /* Darker blue for the heading */
-  /* Use a darker blue shadow for a more subtle glow */
+  color: #15bafc;
   text-shadow:
-    0 0 4px #003e74,   /* Dark blue glow */
-    0 0 8px #003e74,   /* Stronger dark blue glow */
-    0 0 2px #fff;      /* Soft white glow for readability */
+    0 0 4px #003e74,
+    0 0 8px #003e74,
+    0 0 2px #fff;
   margin: 0.5em 0 0.2em 0;
 }
 
-/* Subheading/description: even darker blue text with a subtle glow */
 header p {
   font-size: 1.2em;
-  color: #3fc6ff; /* Slightly darker blue for the subheading */
-  /* Subtle dark blue shadow for a gentle pop */
+  color: #3fc6ff;
   text-shadow:
-    0 0 2px #003e74,   /* Dark blue glow */
-    0 0 1px #fff;      /* Soft white glow */
+    0 0 2px #003e74,
+    0 0 1px #fff;
   margin: 0 0 1em 0;
 }
 
@@ -122,14 +161,15 @@ section > div {
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 1;
 }
+
 /* Hide the timeline card paragraph by default */
 section > div p {
-  display: none; /* Hide the paragraph */
+  display: none;
 }
 
 /* Show the paragraph when you hover over the card */
 section > div:hover p {
-  display: block; /* Show the paragraph on hover */
+  display: block;
 }
 
 section > div::before {
@@ -168,10 +208,12 @@ section h3 {
 }
 
 section img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #00eaff;
+  width: 100%;          /* Image fills the width of the card */
+  height: 140px;        /* All images have the same height */
+  object-fit: cover;    /* Crops and fills the area without stretching */
+  border-radius: 10px;  /* Rounded corners for a modern look */
+  margin-bottom: 10px;  /* Space below the image */
+  border: 1px solid #00eaff; /* Blue border for style */
   box-shadow: 0 0 12px #00eaff44;
 }
 
@@ -185,38 +227,33 @@ section p {
    Scroll Hint & Footer
    ========================= */
 
-/* Scroll hint at the top */
 body > p {
   text-align: center;
   color: #7fd7ff;
   margin: 16px 0 8px 0;
-  font-size: 0.05em;
-  letter-spacing: 0.5px;
-  opacity: 0.39;
-  position: relative;  /* Needed for z-index to work */
-  z-index: 3;          /* Higher than header and timeline cards */
+  font-size: 0.85em;
+  letter-spacing: 1px;
+  opacity: 0.35;
+  position: relative;
+  z-index: 3;
 }
 
-/* Footer styles with blue shadow for a glowing effect */
 footer {
   text-align: center;
   opacity: 0.7;
   margin: 32px 0 12px 0;
   font-size: 1em;
   color: #00eaff;
-  /* Add a soft blue glow to the footer text */
   text-shadow:
-    0 0 6px #00eaff,   /* Blue glow */
-    0 0 2px #003e74;   /* Darker blue shadow */
+    0 0 6px #00eaff,
+    0 0 2px #003e74;
 }
 
-/* Footer links - keep them bright and add a glow */
 footer a {
   color: #00eaff;
   opacity: 1;
   text-decoration: underline;
   transition: color 0.2s;
-  /* Add a blue glow to links as well */
   text-shadow:
     0 0 4px #00eaff,
     0 0 2px #003e74;
@@ -232,3 +269,4 @@ footer a:hover {
   background: linear-gradient(to top, #000000ee 0%, transparent 100%);
   margin-top: -60px;
 }
+
